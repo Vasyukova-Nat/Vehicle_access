@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Нарушители</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {% include 'header.html' %}
+
+    <div class="container_main">
+        <h3 style="text-align: center;">Нарушители</h3><br />
+
+        {% if not show_interaction_window %}
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <label>Запустить нейросеть и просмотреть кадры с камер видеонаблюдения?</label>
+            <form action="/start" method="post">
+                <button type="submit">Старт</button>
+            </form>
+        </div>
+
+        <p>
+            Внимание: после нажатия кнопки "Старт" возможно ожидание результатов
+            длительностью до 1 минуты. Именно столько работает нейросеть, 
+            распознающая автомобильные номера.
+        </p>
+
+        {% endif %}
+
+        {% if show_interaction_window %}
+        <h4>Вывод изображения:</h4>
+        {% if path %}
+        <img src="{{ url_for('image', filename=path) }}" alt="Image" style="max-height: 250px;">
+        {% else %}
+        <p>No images found.</p>
+        {% endif %}
+
+        <p>Распознанный автомобильный номер: {{ pred_text }}</p>
+
+        <!-- <form action="/answer" method="post">
+                <input type="text" name="answer" class="answer" placeholder="Нарушитель да/нет" required>
+                <button type="submit">Отправить ответ</button>
+            </form> -->
+
+        <form action="/answer" method="post">
+            <input type="text" name="answer" class="answer" placeholder="Нарушитель да/нет" required> <br /><br />
+
+            <input type="text" name="comment" placeholder="Введите комментарий">
+            <input type="text" name="address" placeholder="Введите адрес"> <br />
+
+            <label for="date_input">Введите дату:</label>
+            <input type="date" name="date" id="date_input">
+            <label>
+                <input type="checkbox" name="use_today" id="use_today"> Использовать сегодняшнюю
+            </label> <br /><br />
+
+            <button type="submit">Отправить</button>
+        </form>
+
+        <!-- <h3 class="result">{{ result }}</h3> -->
+        {% endif %}
+
+    </div>
+</body>
+
+</html>

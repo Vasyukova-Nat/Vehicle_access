@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Жильцы</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/residents.css')}}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {% include 'header.html' %}
+
+    <div class="container_main">
+        <h3 style="text-align: center;">Жильцы дома по адресу Лунная, 10</h3> <br />
+
+        <label>Добавить нового человека в список жильцов дома?</label>
+        <form action="/add_resident" method="post">
+            <input type="text" name="number" placeholder="Номер автомобиля" required>
+            <input type="text" name="car_model" placeholder="Модель" required>
+            <input type="text" name="owner" placeholder="Владелец" required>
+            <button type="submit">Добавить</button>
+        </form> <br/>
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <label>Вывести список жильцов дома</label>
+            <form action="/list_residents" method="get">
+                <button type="submit">Вывод</button>
+            </form>
+        </div>
+
+        {% if residents %}
+        <p>Жильцы дома по адресу Лунная, 10:</p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Номерной знак</th>
+                    <th>Модель машины</th>
+                    <th>Владелец</th>
+                </tr>
+                {% for resident in residents %}
+                    <tr>
+                        <td>{{ resident[0] }}</td>
+                        <td>{{ resident[1] }}</td>
+                        <td>{{ resident[2] }}</td>
+                        <td>{{ resident[3] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %} <br />
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <label>Проверить жильца</label>
+            <form action="/check_resident" method="post">
+                <input type="text" name="number" placeholder="Номер автомобиля" required>
+                <button type="submit">Check</button>
+            </form>
+        </div>
+        
+        {% if flag_yes %}
+            <p style="color: rgb(0, 129, 86);">Жилец найден!</p>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Номерной знак</th>
+                    <th>Модель машины</th>
+                    <th>Владелец</th>
+                </tr>
+                <tr>
+                    <td>{{ check_result[0] }}</td>
+                    <td>{{ check_result[1] }}</td>
+                    <td>{{ check_result[2] }}</td>
+                    <td>{{ check_result[3] }}</td>
+                </tr>
+            </table>
+        {% elif flag_no %}
+            <p style="color: rgb(255, 0, 0);">Жилец не найден</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

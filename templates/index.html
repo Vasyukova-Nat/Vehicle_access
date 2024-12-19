@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AccessWay</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    {% include 'header.html' %}
+    <div class="container_main">
+        <h3 style="text-align: center;">Главная</h3> <br />
+
+        <p>
+            Тематика данного сайта - контроль доступа ТС (транспортных
+            средств) на участках УДС.
+        </p>
+        
+        <p>
+            Функционал:
+            <li>Оценка нарушения автомобилями ПДД по результатам считывания 
+                нейросетью номеров с кадров камер видеонаблюдения</li>
+            <li>Добавление жильцов дома</li>
+            <li>Вывод списка жильцов дома</li>
+        </p>
+
+        <p>Примечание: нейросеть распознает российские автомобильные номера такого типа:</p>
+        <img src="https://sun9-26.userapi.com/impg/iuRfOjqhAemsbBZnaQkzz0CmM4FhW4ah5CUFtg/rR1_24OvK7M.jpg?size=694x682&quality=95&sign=cadb71e214b3f20f164056c7a5ed2f98&type=album"
+            alt="Формат номера" height="340">
+        
+        <p></p>
+        <p>
+            Более подробная информация о сайте указана на странице 
+            <a href="/contacts" style="color: rgb(0, 0, 210);">контакты</a>.
+        </p>
+
+    </div>
+</body>
+</html>

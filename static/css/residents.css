@@ -1,0 +1,31 @@
+table {
+    width: 60%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #005588;
+    color: white;
+    padding: 8px;
+    text-align: left;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid #dddddd; /* бортики */
+    padding: 8px;
+    text-align: left;
+}
+
+
+tr:nth-child(odd) {
+    background-color: #eaf4ff;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+tr:hover {
+    background-color: #ffe0e0;
+}

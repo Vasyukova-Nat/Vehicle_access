@@ -1,0 +1,12 @@
+.navbar {
+    background-color: #003366;
+} 
+
+.navbar-brand {
+    font-weight: bold; /* Жирный шрифт для названия */
+    color: white;
+}
+
+.custom-link {
+    color: white;
+}

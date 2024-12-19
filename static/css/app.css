@@ -1,0 +1,8 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container_main {
+    margin: 10px 20px 0px 20px;
+    /* Порядок: top right bottom left. (вместо margin-inline) */
+}
