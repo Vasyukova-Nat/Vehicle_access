@@ -19,15 +19,15 @@
 
         {% if not show_interaction_window %}
         <div style="display: flex; gap: 10px; align-items: center;">
-            <label>Запустить нейросеть и просмотреть кадры с камер видеонаблюдения?</label>
+            <label>Запустить нейросеть и просмотреть кадры распознанных нарушений с камер видеонаблюдения?</label>
             <form action="/start" method="post">
                 <button type="submit">Старт</button>
             </form>
         </div>
 
         <p>
-            Внимание: после нажатия кнопки "Старт" возможно ожидание результатов
-            длительностью до 1 минуты. Именно столько работает нейросеть, 
+            <span style="color: green;"><b>Внимание:</b></span> после нажатия кнопки "Вывод" возможно ожидание результатов
+            длительностью до 1 минуты. Именно столько работает нейросеть,
             распознающая автомобильные номера.
         </p>
 
@@ -41,27 +41,21 @@
         <p>No images found.</p>
         {% endif %}
 
-        <p>Распознанный автомобильный номер: {{ pred_text }}</p>
-
+        <p>Распознанный автомобильный номер: {{ pred_text[0] }}</p>
+        <p>Нарушение: {{ violation_name }}</p>
+        <p>Адрес: {{ violation_address }}</p>
+        
         <!-- <form action="/answer" method="post">
-                <input type="text" name="answer" class="answer" placeholder="Нарушитель да/нет" required>
-                <button type="submit">Отправить ответ</button>
-            </form> -->
-
-        <form action="/answer" method="post">
-            <input type="text" name="answer" class="answer" placeholder="Нарушитель да/нет" required> <br /><br />
-
-            <input type="text" name="comment" placeholder="Введите комментарий">
-            <input type="text" name="address" placeholder="Введите адрес"> <br />
-
-            <label for="date_input">Введите дату:</label>
-            <input type="date" name="date" id="date_input">
-            <label>
-                <input type="checkbox" name="use_today" id="use_today"> Использовать сегодняшнюю
-            </label> <br /><br />
-
+            <input type="text" name="answer" class="answer" placeholder="да/нет" required> <br /><br />
+            <br />
             <button type="submit">Отправить</button>
-        </form>
+        </form> -->
+
+        <form action="/answer" method="POST">
+            <p>Данная информация будет записана в БД. Подтвердить?</p>
+            <button type="submit">Далее</button>
+            <button type="submit" name="report_error">Не является нарушением. Сообщить об ошибке</button>
+        </form> 
 
         <!-- <h3 class="result">{{ result }}</h3> -->
         {% endif %}

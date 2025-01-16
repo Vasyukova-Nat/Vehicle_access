@@ -79,7 +79,19 @@
             </table>
         {% elif flag_no %}
             <p style="color: rgb(255, 0, 0);">Жилец не найден</p>
-        {% endif %}
+        {% endif %} <br />
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <label>Просмотреть фото с камеры</label>
+            <form action="/start_showing_video_camera" method="post">
+                <button type="submit">Вывод</button>
+            </form>
+        </div>
+        <p>
+            <span style="color: green;"><b>Внимание:</b></span> после нажатия кнопки "Вывод" возможно ожидание результатов
+            длительностью до 1 минуты. Именно столько работает нейросеть,
+            распознающая автомобильные номера.
+        </p>
     </div>
 
 </body>

@@ -123,3 +123,30 @@ def connect_and_save_residents(conn, number: str, car_model: str, owner: str):
     finally:
         if cursor: # Закрытие курсора
             cursor.close()
+
+def check_resident_in_table(conn, number: str):
+    cursor = conn.cursor()
+    try:
+        cursor.execute('SELECT * FROM residents_Lunnaya_10 WHERE number = %s', (number,))
+        resident = cursor.fetchone()
+        conn.commit() 
+        return resident  
+        
+    except Exception as e:
+        print(f"Произошла ошибка: {e}")
+    
+    finally:
+        if cursor: # Закрытие курсора
+            cursor.close()
+
+###############################################################################
+# Работа с файлом .txt , содержащем подписи к фотографиям нарушений #
+# Функция для получения информации о фотографии
+def get_photo_info(index, captions_file):
+    with open(captions_file, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+        if index < len(lines):
+            return lines[index].strip().split(';')  # Предполагаем, что данные разделены запятыми
+        else:
+            return None
+
